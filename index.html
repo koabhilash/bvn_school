@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bharathi Vidhya Nikethan High School – Dhanwada</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Noto+Sans:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a3a6b;
+    --deep-blue: #1e4080;
+    --mid-blue: #2d5fa6;
+    --sky: #4a90d9;
+    --gold: #e8820c;
+    --saffron: #d4690a;
+    --light-gold: #f5a623;
+    --cream: #fff8ee;
+    --bg: #f5f7fa;
+    --bg2: #eef1f7;
+    --bg3: #ffffff;
+    --white: #ffffff;
+    --text-dark: #1a2a4a;
+    --text-mid: #3d5a80;
+    --text-light: #6b82a0;
+    --card-bg: #ffffff;
+    --card-border: #dde4f0;
+    --section-alt: #edf1f8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 2px solid rgba(232,130,12,0.15);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 70px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 20px rgba(26,58,107,0.08);
+  }
+
+  nav.scrolled { box-shadow: 0 4px 30px rgba(26,58,107,0.15); }
+
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+
+  .nav-logo {
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 2px solid var(--gold); overflow: hidden;
+    background: var(--mid-blue);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+  .nav-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; font-weight: 700;
+    color: var(--navy); line-height: 1.2;
+  }
+  .nav-title span { color: var(--gold); font-size: 0.68rem; font-weight: 500; display: block; }
+
+  .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+
+  .nav-links a {
+    color: var(--text-mid); text-decoration: none;
+    font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em;
+    text-transform: uppercase; transition: color 0.3s;
+    position: relative; padding-bottom: 4px;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 0; height: 2px; background: var(--gold); transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    background: linear-gradient(135deg, var(--saffron), var(--light-gold));
+    color: #fff !important; padding: 8px 20px; border-radius: 25px;
+    font-weight: 700 !important; box-shadow: 0 4px 15px rgba(232,130,12,0.3);
+    transition: transform 0.2s, box-shadow 0.2s !important;
+  }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(232,130,12,0.45); }
+  .nav-cta::after { display: none !important; }
+
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px; cursor: pointer;
+    background: none; border: none; padding: 5px;
+  }
+  .hamburger span { width: 24px; height: 2px; background: var(--navy); transition: all 0.3s; display: block; }
+
+  .mobile-menu {
+    display: none; position: fixed; top: 70px; left: 0; width: 100%;
+    background: #fff; padding: 2rem; flex-direction: column; gap: 1.5rem;
+    z-index: 999; border-bottom: 2px solid rgba(232,130,12,0.15);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+  .mobile-menu a { color: var(--text-dark); text-decoration: none; font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; transition: color 0.3s; }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-menu.open { display: flex; }
+
+  /* ── TICKER ── */
+  .ticker-wrap {
+    background: linear-gradient(90deg, var(--navy), var(--deep-blue));
+    padding: 9px 0; overflow: hidden;
+  }
+  .ticker {
+    display: flex; gap: 4rem; animation: ticker 30s linear infinite;
+    white-space: nowrap; width: max-content;
+  }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .ticker span { color: #fff; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.05em; }
+  .ticker span::before { content: '★  '; color: var(--light-gold); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: linear-gradient(150deg, #e8f0fc 0%, #dce8f8 40%, #f0f5ff 100%);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding-top: 70px;
+  }
+
+  .hero-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .particle {
+    position: absolute; border-radius: 50%;
+    background: var(--gold); opacity: 0.12;
+    animation: float 8s infinite ease-in-out;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0) rotate(0deg); opacity: 0.12; }
+    50% { transform: translateY(-30px) rotate(180deg); opacity: 0.25; }
+  }
+
+  .hero-bg-text {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(80px,18vw,220px); font-weight: 900;
+    color: rgba(26,58,107,0.04); white-space: nowrap; pointer-events: none;
+  }
+
+  .hero-content {
+    max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    align-items: center; width: 100%; position: relative; z-index: 2;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(232,130,12,0.12); border: 1px solid rgba(232,130,12,0.3);
+    padding: 6px 16px; border-radius: 20px;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--saffron);
+    margin-bottom: 1.5rem; animation: fadeInUp 0.8s ease both;
+  }
+  .hero-badge::before { content: '⭐'; }
+
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem,5vw,4rem); font-weight: 900; line-height: 1.1;
+    color: var(--navy); animation: fadeInUp 0.8s 0.2s ease both; margin-bottom: 0.5rem;
+  }
+  .hero-headline .accent { color: var(--gold); }
+
+  .hero-tagline {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.2rem,2.5vw,1.8rem); color: var(--saffron);
+    margin-bottom: 1.5rem; animation: fadeInUp 0.8s 0.3s ease both;
+  }
+
+  .hero-desc {
+    color: var(--text-mid); line-height: 1.8; font-size: 1rem;
+    margin-bottom: 2.5rem; animation: fadeInUp 0.8s 0.4s ease both;
+  }
+
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeInUp 0.8s 0.5s ease both; }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--saffron), var(--light-gold));
+    color: #fff; padding: 14px 32px; border-radius: 35px;
+    font-weight: 700; font-size: 0.95rem; text-decoration: none;
+    transition: all 0.3s; border: none; cursor: pointer;
+    box-shadow: 0 6px 25px rgba(232,130,12,0.35); letter-spacing: 0.03em;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 35px rgba(232,130,12,0.5); }
+
+  .btn-outline {
+    background: transparent; color: var(--navy);
+    border: 2px solid rgba(26,58,107,0.3);
+    padding: 14px 32px; border-radius: 35px;
+    font-weight: 600; font-size: 0.95rem; text-decoration: none;
+    transition: all 0.3s; cursor: pointer;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-3px); }
+
+   .hero-visual {
+    display: flex; justify-content: center; align-items: center;
+    animation: fadeInRight 1s 0.3s ease both; position: relative;
+  }
+ 
+  .hero-logo-wrap { position: relative; width: 320px; height: 320px; display: flex; align-items: center; justify-content: center; }
+ 
+  .hero-logo-ring {
+    position: absolute; border-radius: 50%;
+    border: 1px solid rgba(232,130,12,0.2);
+    animation: spin-slow 20s linear infinite;
+  }
+  .hero-logo-ring:nth-child(1) { width: 100%; height: 100%; }
+  .hero-logo-ring:nth-child(2) { width: 80%; height: 80%; animation-direction: reverse; animation-duration: 15s; border-color: rgba(26,58,107,0.12); }
+  @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+ 
+  /* ── FIXED: Hero logo now uses the correct large circle ── */
+  .hero-logo-inner {
+    width: 220px; height: 220px; border-radius: 50%;
+    border: 4px solid var(--gold);
+    box-shadow: 0 0 60px rgba(232,130,12,0.25), 0 0 0 10px rgba(232,130,12,0.06);
+    overflow: hidden; z-index: 2; background: var(--mid-blue);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-logo-inner img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+ 
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem;
+    margin-top: 3rem; animation: fadeInUp 0.8s 0.6s ease both;
+  }
+ 
+  .stat-card {
+    background: #fff; border: 1px solid var(--card-border); border-radius: 12px;
+    padding: 1.2rem; text-align: center;
+    box-shadow: 0 4px 20px rgba(26,58,107,0.08);
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .stat-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+  .stat-number {
+    font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900;
+    background: linear-gradient(135deg, var(--saffron), var(--light-gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: block;
+  }
+  .stat-label { font-size: 0.75rem; color: var(--text-light); margin-top: 4px; }
+ 
+  @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeInRight { from { opacity:0; transform:translateX(40px); } to { opacity:1; transform:translateX(0); } }
+ 
+  /* ── SECTIONS SHARED ── */
+  section { padding: 5rem 0; position: relative; }
+  .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+  .section-label {
+    display: inline-block;
+    background: rgba(232,130,12,0.1); border: 1px solid rgba(232,130,12,0.25);
+    color: var(--saffron); padding: 4px 14px; border-radius: 20px;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem,4vw,3rem); font-weight: 900; line-height: 1.15;
+    color: var(--navy); margin-bottom: 1rem;
+  }
+  .section-title .accent { color: var(--gold); }
+  .section-desc { color: var(--text-mid); line-height: 1.8; max-width: 600px; font-size: 1rem; }
+
+  /* ── NOTICES ── */
+  .notice-section {
+    background: var(--bg3); border-top: 2px solid rgba(232,130,12,0.1);
+    border-bottom: 2px solid rgba(232,130,12,0.1); padding: 3rem 0;
+  }
+  .notice-cards { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem; }
+  .notice-card {
+    background: var(--section-alt); border: 1px solid var(--card-border);
+    border-left: 4px solid var(--gold);
+    border-radius: 10px; padding: 1.2rem 1.5rem; flex: 1; min-width: 200px;
+  }
+  .notice-card .notice-date { color: var(--saffron); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 5px; }
+  .notice-card h4 { color: var(--navy); font-size: 0.92rem; font-weight: 700; margin-bottom: 4px; }
+  .notice-card p { color: var(--text-mid); font-size: 0.8rem; }
+
+  /* ── ABOUT ── */
+  #about { background: var(--bg3); }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 3rem; }
+
+  .about-visual-stack { position: relative; height: 460px; }
+  .about-card-big {
+    position: absolute; width: 80%; aspect-ratio: 4/3;
+    border-radius: 16px; overflow: hidden;
+    border: 3px solid rgba(232,130,12,0.25);
+    box-shadow: 0 20px 60px rgba(26,58,107,0.15);
+  }
+  .about-card-big:nth-child(1) { top: 0; left: 0; z-index: 2; }
+  .about-card-big:nth-child(2) { bottom: 0; right: 0; z-index: 1; width: 65%; }
+  .about-card-big img { width: 100%; height: 100%; object-fit: cover; }
+  .about-card-big.placeholder {
+    background: linear-gradient(135deg, #dce8f8, #c8d8f0);
+    display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem;
+  }
+  .about-card-big.placeholder .icon { font-size: 4rem; }
+  .about-card-big.placeholder p { color: var(--text-mid); font-size: 0.85rem; text-align: center; padding: 0 1rem; }
+
+  .about-accent-badge {
+    position: absolute; top: 50%; left: 60%; transform: translate(-50%,-50%);
+    background: linear-gradient(135deg, var(--saffron), var(--light-gold));
+    color: #fff; padding: 12px 20px; border-radius: 12px;
+    font-weight: 700; font-size: 0.85rem; text-align: center;
+    z-index: 3; box-shadow: 0 8px 25px rgba(232,130,12,0.35); line-height: 1.4;
+  }
+
+  .about-points { list-style: none; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+  .about-points li {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--section-alt); border: 1px solid var(--card-border);
+    border-radius: 12px; padding: 1rem 1.2rem; transition: all 0.3s;
+  }
+  .about-points li:hover { transform: translateX(6px); border-color: var(--gold); box-shadow: 0 4px 15px rgba(232,130,12,0.1); }
+  .point-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+  .point-text strong { display: block; color: var(--navy); font-size: 0.92rem; margin-bottom: 3px; }
+  .point-text span { color: var(--text-mid); font-size: 0.82rem; }
+.about-visual-stack{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:18px;
+}
+
+.achievement-card{
+    background:var(--section-alt);
+    border:1px solid var(--card-border);
+    padding:25px;
+    border-radius:16px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(26,58,107,0.08);
+    transition:all .35s ease;
+    cursor:pointer;
+}
+
+.achievement-card:hover{
+    transform:translateY(-8px);
+    border-color:var(--gold);
+    box-shadow:0 12px 30px rgba(232,130,12,0.15);
+}
+
+.card-icon{
+    font-size:2.5rem;
+    margin-bottom:12px;
+}
+
+.achievement-card h3{
+    color:var(--navy);
+    font-size:2.2rem;
+    font-weight:800;
+    margin:0;
+    line-height:1;
+}
+
+.achievement-card p{
+    margin-top:10px;
+    color:var(--text-mid);
+    font-size:0.85rem;
+    font-weight:500;
+    line-height:1.4;
+}
+  /* ── WHY US ── */
+  #why-us { background: var(--section-alt); }
+
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 1.5rem; margin-top: 3rem; }
+
+  .why-card {
+    background: var(--white); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 2rem;
+    transition: all 0.4s; cursor: default; position: relative; overflow: hidden;
+    box-shadow: 0 2px 15px rgba(26,58,107,0.06);
+  }
+  .why-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--saffron), var(--light-gold));
+    transform: scaleX(0); transform-origin: left; transition: transform 0.4s;
+  }
+  .why-card:hover { transform: translateY(-8px); border-color: rgba(232,130,12,0.3); box-shadow: 0 15px 40px rgba(26,58,107,0.12); }
+  .why-card:hover::before { transform: scaleX(1); }
+  .why-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+  .why-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 0.7rem; }
+  .why-card p { color: var(--text-mid); font-size: 0.88rem; line-height: 1.7; }
+
+  /* ── ACADEMICS ── */
+  #academics { background: var(--bg3); }
+
+  .academics-tabs { display: flex; gap: 1rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+  .tab-btn {
+    background: var(--section-alt); border: 1px solid var(--card-border);
+    color: var(--text-mid); padding: 10px 24px; border-radius: 25px;
+    font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all 0.3s;
+    font-family: 'Noto Sans', sans-serif;
+  }
+  .tab-btn.active, .tab-btn:hover {
+    background: linear-gradient(135deg, var(--saffron), var(--light-gold));
+    color: #fff; border-color: transparent;
+    box-shadow: 0 4px 15px rgba(232,130,12,0.3);
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; animation: fadeInUp 0.4s ease; }
+
+  .academics-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 1.5rem; }
+  .acad-card {
+    background: var(--section-alt); border: 1px solid var(--card-border);
+    border-radius: 14px; padding: 1.5rem; transition: all 0.3s;
+    box-shadow: 0 2px 10px rgba(26,58,107,0.05);
+  }
+  .acad-card:hover { transform: translateY(-5px); border-color: var(--gold); box-shadow: 0 10px 30px rgba(26,58,107,0.1); }
+  .acad-card .acad-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+  .acad-card h4 { color: var(--saffron); font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .acad-card p { color: var(--text-mid); font-size: 0.83rem; line-height: 1.6; }
+
+  /* ── GALLERY ── */
+  #gallery { background: var(--section-alt); }
+
+  .gallery-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+  .gallery-filters { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .filter-btn {
+    background: var(--white); border: 1px solid var(--card-border);
+    color: var(--text-mid); padding: 8px 18px; border-radius: 20px;
+    font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.3s;
+    font-family: 'Noto Sans', sans-serif;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: rgba(232,130,12,0.1); border-color: var(--gold); color: var(--saffron);
+  }
+
+  .instagram-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:100px;
+    margin-top:30px;
+}
+
+.instagram-grid .gallery-item{
+    width:100%;
+}
+
+.instagram-grid .instagram-media{
+    min-width:100% !important;
+    width:100% !important;
+    max-width:100% !important;
+    margin:0 !important;
+}
+.insta-follow-container{
+    text-align: center;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.insta-follow-btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 992px){
+    .instagram-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media (max-width: 768px){
+    .instagram-grid{
+        grid-template-columns:1fr;
+    }
+}
+  /* Natural-size masonry gallery */
+  .gallery-grid {
+    columns: 3; column-gap: 14px;
+  }
+  .gallery-item {
+    break-inside: avoid; margin-bottom: 14px;
+    border-radius: 12px; overflow: hidden;
+    position: relative; cursor: pointer;
+    border: 1px solid var(--card-border);
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(26,58,107,0.08);
+  }
+  .gallery-item:hover { transform: scale(1.02); z-index: 2; box-shadow: 0 12px 35px rgba(26,58,107,0.18); }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+  .gallery-img-real { width: 100%; display: block; }
+
+  /* Placeholder cards with realistic proportions */
+  .gallery-placeholder {
+    width: 100%; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 8px;
+    background: linear-gradient(135deg, #dce8f8, #ccd8ef);
+    padding: 2rem 1rem;
+  }
+  .gallery-placeholder.tall { min-height: 260px; }
+  .gallery-placeholder.medium { min-height: 180px; }
+  .gallery-placeholder.short { min-height: 140px; }
+  .gallery-placeholder .g-emoji { font-size: 2.5rem; }
+  .gallery-placeholder span { color: var(--text-mid); font-size: 0.8rem; text-align: center; }
+
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(26,58,107,0.75) 100%);
+    opacity: 0; transition: opacity 0.3s;
+    display: flex; align-items: flex-end; padding: 1rem;
+  }
+  .gallery-overlay p { color: #fff; font-size: 0.85rem; font-weight: 600; }
+
+  /* Instagram button */
+  .insta-follow-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: #fff; padding: 13px 28px; border-radius: 35px;
+    font-weight: 700; font-size: 0.95rem; text-decoration: none;
+    transition: all 0.3s; box-shadow: 0 6px 25px rgba(220,39,67,0.3);
+  }
+  .insta-follow-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 35px rgba(220,39,67,0.45); }
+  .insta-follow-btn svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
+
+  /* ── EVENTS ── */
+  #events { background: var(--bg3); }
+
+  .events-timeline { position: relative; margin-top: 3rem; padding-left: 2rem; }
+  .events-timeline::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--gold), transparent);
+  }
+  .event-item { position: relative; padding: 0 0 2.5rem 2rem; opacity: 0.75; transition: opacity 0.3s; }
+  .event-item:hover { opacity: 1; }
+  .event-dot {
+    position: absolute; left: -7px; top: 6px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--gold); border: 3px solid var(--bg3);
+    box-shadow: 0 0 10px rgba(232,130,12,0.4);
+  }
+  .event-date { font-size: 0.75rem; font-weight: 700; color: var(--saffron); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .event-card {
+    background: var(--section-alt); border: 1px solid var(--card-border);
+    border-radius: 12px; padding: 1.2rem 1.5rem; transition: border-color 0.3s;
+  }
+  .event-card:hover { border-color: var(--gold); box-shadow: 0 4px 15px rgba(232,130,12,0.1); }
+  .event-card h4 { color: var(--navy); font-size: 1rem; font-weight: 700; margin-bottom: 5px; }
+  .event-card p { color: var(--text-mid); font-size: 0.85rem; }
+  .event-tag {
+    display: inline-block; background: rgba(232,130,12,0.1); color: var(--saffron);
+    border-radius: 10px; padding: 2px 10px; font-size: 0.72rem; font-weight: 600; margin-top: 8px;
+  }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { background: var(--section-alt); }
+
+  .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .testimonial-card {
+    background: var(--white); border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 1.8rem; transition: all 0.3s; position: relative;
+    box-shadow: 0 4px 20px rgba(26,58,107,0.07);
+  }
+  .testimonial-card:hover { transform: translateY(-5px); border-color: rgba(232,130,12,0.3); box-shadow: 0 12px 35px rgba(26,58,107,0.12); }
+  .quote-mark { font-size: 4rem; color: rgba(232,130,12,0.12); font-family: 'Playfair Display', serif; line-height: 1; position: absolute; top: 10px; right: 20px; }
+  .testimonial-text { color: var(--text-mid); font-size: 0.9rem; line-height: 1.75; margin-bottom: 1.2rem; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 10px; }
+  .author-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--saffron), var(--light-gold));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; font-weight: 700; color: #fff; flex-shrink: 0;
+  }
+  .author-info .author-name { color: var(--navy); font-weight: 700; font-size: 0.9rem; }
+  .author-info .author-role { color: var(--gold); font-size: 0.78rem; }
+
+  /* ── ADMISSIONS ── */
+  #admissions { background: var(--bg3); position: relative; overflow: hidden; }
+  #admissions::before {
+    content: ''; position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,130,12,0.04) 0%, transparent 70%);
+  }
+
+  .admissions-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem; }
+
+  .admission-form-card {
+    background: var(--section-alt); border: 1px solid rgba(232,130,12,0.2);
+    border-radius: 20px; padding: 2rem; max-width: 700px; margin: 0 auto; width: 100%;
+  }
+  .admission-form-card h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--navy); margin-bottom: 1.5rem; }
+
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label { display: block; color: var(--text-mid); font-size: 0.82rem; font-weight: 600; margin-bottom: 6px; letter-spacing: 0.03em; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; background: var(--white);
+    border: 1px solid var(--card-border); border-radius: 10px; padding: 12px 14px;
+    color: var(--text-dark); font-size: 0.9rem; font-family: 'Noto Sans', sans-serif;
+    transition: border-color 0.3s; outline: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(232,130,12,0.1); }
+  .form-group select option { background: #fff; color: var(--text-dark); }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+
+  .form-submit {
+    width: 100%; background: linear-gradient(135deg, var(--saffron), var(--light-gold));
+    color: #fff; border: none; border-radius: 12px; padding: 14px;
+    font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s;
+    font-family: 'Noto Sans', sans-serif; margin-top: 0.5rem;
+    box-shadow: 0 6px 20px rgba(232,130,12,0.3);
+  }
+  .form-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(232,130,12,0.45); }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--section-alt); }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; margin-top: 3rem; }
+
+  /* Single-row contact info strip */
+  .contact-info { display: flex; flex-direction: column; gap: 0; }
+
+  .contact-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 1rem 1.2rem; background: var(--white);
+    border: 1px solid var(--card-border); border-bottom: none;
+    transition: background 0.2s;
+  }
+  .contact-row:first-child { border-radius: 14px 14px 0 0; }
+  .contact-row:last-child { border-bottom: 1px solid var(--card-border); border-radius: 0 0 14px 14px; }
+  .contact-row:hover { background: #fdf6ee; }
+
+  .contact-row-icon {
+    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+    background: rgba(232,130,12,0.1); display: flex; align-items: center; justify-content: center;
+  }
+  .contact-row-icon svg { width: 20px; height: 20px; }
+
+  .contact-row-text { flex: 1; }
+  .contact-row-text .c-label { font-size: 0.72rem; font-weight: 700; color: var(--saffron); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 2px; }
+  .contact-row-text .c-value { font-size: 0.88rem; color: var(--text-dark); font-weight: 500; line-height: 1.4; }
+  .contact-row-text a { color: var(--text-dark); text-decoration: none; font-size: 0.88rem; font-weight: 500; }
+  .contact-row-text a:hover { color: var(--saffron); }
+
+  .map-embed {
+    border-radius: 16px; overflow: hidden; border: 1px solid var(--card-border);
+    height: 400px; box-shadow: 0 8px 30px rgba(26,58,107,0.1);
+  }
+  .map-embed iframe { width: 100%; height: 100%; border: none; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    border-top: 3px solid rgba(232,130,12,0.3);
+    padding: 3rem 0 1.5rem;
+  }
+
+  .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+    padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .footer-brand .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+  .footer-logo-img {
+    width: 50px; height: 50px; border-radius: 50%;
+    border: 2px solid var(--gold); overflow: hidden; flex-shrink: 0;
+    background: var(--mid-blue); display: flex; align-items: center; justify-content: center; font-size: 22px;
+  }
+  .footer-logo-img img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+  .footer-brand-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: #fff; line-height: 1.3; }
+  .footer-brand-name span { color: var(--light-gold); font-size: 0.75rem; font-weight: 400; display: block; }
+  .footer-desc { color: rgba(255,255,255,0.55); font-size: 0.85rem; line-height: 1.7; margin-bottom: 1.5rem; }
+
+  .social-links { display: flex; gap: 0.75rem; }
+  .social-link {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .social-link:hover { transform: translateY(-3px); }
+  .social-link svg { width: 18px; height: 18px; }
+  .social-link.insta:hover { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); border-color: transparent; }
+  .social-link.yt:hover { background: #ff0000; border-color: transparent; }
+  .social-link.maps:hover { background: #4285f4; border-color: transparent; }
+
+  .footer-col h5 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--light-gold); margin-bottom: 1.2rem; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul li a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+  .footer-col ul li a:hover { color: var(--light-gold); }
+
+  .footer-bottom {
+    padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-bottom p { color: rgba(255,255,255,0.3); font-size: 0.8rem; }
+
+  /* ── SCROLL TOP ── */
+  #scroll-top {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
+    width: 46px; height: 46px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--saffron), var(--light-gold));
+    border: none; cursor: pointer; display: none;
+    align-items: center; justify-content: center;
+    font-size: 1.2rem; color: #fff;
+    box-shadow: 0 6px 20px rgba(232,130,12,0.4); transition: transform 0.3s;
+  }
+  #scroll-top:hover { transform: scale(1.1); }
+  #scroll-top.visible { display: flex; }
+
+  /* ── REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  .scroll-hint {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    color: var(--text-mid); font-size: 0.72rem; letter-spacing: 0.1em;
+    text-transform: uppercase; animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-8px)} }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .hero-content { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+    .hero-visual { order: -1; }
+    .hero-logo-wrap { width: 200px; height: 200px; }
+    .hero-logo-inner { width: 140px; height: 140px; }
+    .hero-btns { justify-content: center; }
+    .hero-stats { grid-template-columns: repeat(3,1fr); }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-visual-stack { display: none; }
+    .gallery-grid { columns: 2; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .events-side-grid { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 600px) {
+    .hero-stats { grid-template-columns: 1fr; }
+    .gallery-grid { columns: 1; }
+    .footer-top { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
+
+  @media (max-width: 768px){
+
+  .about-visual-stack{
+      display:grid !important;
+      grid-template-columns:repeat(2,1fr) !important;
+      gap:12px !important;
+
+      position:static !important;
+      height:auto !important;
+      width:100%;
+  }
+
+  .achievement-card{
+      width:100%;
+      padding:16px 10px;
+  }
+
+  .achievement-card h3{
+      font-size:1.5rem;
+  }
+
+  .achievement-card p{
+      font-size:.75rem;
+  }
+
+  .about-accent-badge{
+      position:static !important;
+      transform:none !important;
+      grid-column:1/-1;
+      margin:10px auto 0;
+      display:block;
+      width:max-content;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-brand">
+   <div class="nav-logo">
+    <img src="logo.png" alt="School Logo">
+</div>
+    <div class="nav-title">BVN High School <span>Dhanwada </span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#why-us">Why Us</a></li>
+    <li><a href="#academics">Academics</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#admissions" class="nav-cta">Admissions</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#why-us" onclick="toggleMenu()">Why Us</a>
+  <a href="#academics" onclick="toggleMenu()">Academics</a>
+  <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="#events" onclick="toggleMenu()">Events</a>
+  <a href="#admissions" onclick="toggleMenu()">Admissions</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap" style="margin-top:70px;">
+  <div class="ticker">
+    <span>Admissions Open 2026–27</span>
+    <span>Admissions Open 2026–27</span>
+    <span>Admissions Open 2026–27</span>
+    <span>Admissions Open 2026–27</span>
+    <span>Admissions Open 2026–27</span>
+    <span>Admissions Open 2026–27</span>
+    <span>Admissions Open 2026–27</span>
+    <span>Admissions Open 2026–27</span>
+    <span>Admissions Open 2026–27</span>
+    <span>Admissions Open 2026–27</span>
+    <span>Admissions Open 2026–27</span>
+    <span>Admissions Open 2026–27</span>
+  </div>
+</div>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-bg-text">BVN</div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">Est. in Dhanwada, Telangana</div>
+      <h1 class="hero-headline"><span class="accent">Bharathi</span> Vidhya<br>Nikethan High<br>School</h1>
+      <p class="hero-tagline">"The School for a Better Tomorrow"</p>
+      <p class="hero-desc">Nurturing young minds with quality education, cultural values, and holistic development in the heart of Mahabubnagar, Telangana. Where every child discovers their potential.</p>
+      <div class="hero-btns">
+        <a href="#admissions" class="btn-primary">Apply for Admission</a>
+        <a href="#about" class="btn-outline">Discover BVN</a>
+      </div>
+      
+    </div>
+    <div class="hero-visual">
+      <div class="hero-logo-wrap">
+        <div class="hero-logo-ring"></div>
+        <div class="hero-logo-ring"></div>
+        <!-- FIXED: Using hero-logo-inner (220px circle) instead of footer-logo-img (50px) -->
+        <div class="hero-logo-inner">
+          <img src="logo.png" alt="BVN School Logo">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>Scroll Down</span><span>↓</span></div>
+</section>
+
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-left reveal">
+        <div class="section-label">🏫 About Us</div>
+        <h2 class="section-title">Shaping <span class="accent">Futures</span> Since Day One</h2>
+        <p class="section-desc">Bharathi Vidhya Nikethan High School is a premier educational institution in Dhanwada, Telangana. We believe every child carries infinite potential waiting to be ignited.</p>
+        <ul class="about-points">
+          <li><span class="point-icon">🎯</span><div class="point-text"><strong>Our Mission</strong><span>To provide quality education that fosters intellectual growth, cultural pride, and character development in every student.</span></div></li>
+          <li><span class="point-icon">🌟</span><div class="point-text"><strong>Our Vision</strong><span>A school where every child blossoms into a confident, responsible, and compassionate citizen of tomorrow.</span></div></li>
+          <li><span class="point-icon">📍</span><div class="point-text"><strong>Our Location</strong><span>Vil & Mdl: Dhanwada, Telangana – deeply rooted in the community we serve.</span></div></li>
+          <li><span class="point-icon">🤝</span><div class="point-text"><strong>Community Bond</strong><span>We celebrate Sankranthi, Bathukamma, Ganesha Chaturthi and all festivals together as one big family.</span></div></li>
+        </ul>
+      </div>
+     <div class="about-visual-stack reveal">
+
+  <div class="achievement-card">
+    <div class="card-icon">🎓</div>
+    <h3 class="stat-number" data-target="500" data-suffix="+">0</h3>
+    <p>Students Empowered</p>
+  </div>
+
+  <div class="achievement-card">
+    <div class="card-icon">🏆</div>
+    <h3 class="stat-number" data-target="100" data-suffix="+">0</h3>
+    <p>Awards & Achievements</p>
+  </div>
+
+  <div class="achievement-card">
+    <div class="card-icon">📚</div>
+    <h3 class="stat-number" data-target="10" data-suffix="+">0</h3>
+    <p>Years of Excellence</p>
+  </div>
+
+  <div class="achievement-card">
+    <div class="card-icon">🎯</div>
+    <h3 class="stat-number" data-target="100" data-suffix="%">0</h3>
+    <p>Pass Percentage</p>
+  </div>
+
+  <div class="about-accent-badge">
+    ⭐ School for a<br>Better Tomorrow
+  </div>
+
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why-us">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto 1rem;">
+      <div class="section-label">✨ Why Choose BVN</div>
+      <h2 class="section-title">Where Learning <span class="accent">Comes Alive</span></h2>
+      <p class="section-desc" style="margin:0 auto;">We go beyond textbooks to nurture well-rounded human beings ready for tomorrow's world.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal"><span class="why-icon">👨‍🏫</span><h3>Expert Faculty</h3><p>Dedicated and experienced teachers who genuinely care about each student's progress and holistic development.</p></div>
+      <div class="why-card reveal"><span class="why-icon">🔬</span><h3>Modern Labs</h3><p>Science and computer labs equipped with modern tools to make learning hands-on, interactive, and exciting.</p></div>
+      <div class="why-card reveal"><span class="why-icon">🎨</span><h3>Arts & Culture</h3><p>Rich cultural program celebrating Telugu traditions — Bathukamma, Sankranthi, Ganesha Chaturthi and more.</p></div>
+      <div class="why-card reveal"><span class="why-icon">🚌</span><h3>Educational Tours</h3><p>Exciting field trips and excursions like the Planetarium Visit (2025) to broaden young horizons beyond classrooms.</p></div>
+      <div class="why-card reveal"><span class="why-icon">🎤</span><h3>Confidence Building</h3><p>Student Led Conferences and stage programs help children discover their voice and build self-confidence early.</p></div>
+      <div class="why-card reveal"><span class="why-icon">🏅</span><h3>Proven Results</h3><p>Consistent academic excellence with strong board exam results and proud alumni across diverse fields.</p></div>
+      <div class="why-card reveal"><span class="why-icon">🌈</span><h3>Inclusive Environment</h3><p>A warm, safe, and inclusive campus where every child — regardless of background — is valued and celebrated.</p></div>
+      <div class="why-card reveal"><span class="why-icon">📱</span><h3>Active Community</h3><p>Stay connected through our active Instagram page with 635+ followers, sharing school moments as they happen.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ACADEMICS -->
+<section id="academics">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">📚 Academics</div>
+      <h2 class="section-title">What We <span class="accent">Teach</span></h2>
+      <p class="section-desc">A comprehensive curriculum designed to challenge, inspire, and prepare every student for a bright future.</p>
+    </div>
+    <div class="academics-tabs reveal" style="margin-top:2rem;">
+      <button class="tab-btn active" onclick="switchTab('primary',event)">Primary (I–V)</button>
+      <button class="tab-btn" onclick="switchTab('upper',event)">Upper Primary (VI–VIII)</button>
+      <button class="tab-btn" onclick="switchTab('secondary',event)">Secondary (IX–X)</button>
+      <button class="tab-btn" onclick="switchTab('activities',event)">Activities</button>
+    </div>
+    <div id="tab-primary" class="tab-panel active reveal">
+      <div class="academics-grid">
+        <div class="acad-card"><div class="acad-icon">🔤</div><h4>English Language</h4><p>Strong foundation in reading, writing and communication from early grades.</p></div>
+        <div class="acad-card"><div class="acad-icon">🔢</div><h4>Mathematics</h4><p>Building numerical intelligence through concepts, problem-solving and logic.</p></div>
+        <div class="acad-card"><div class="acad-icon">🌿</div><h4>Environmental Studies</h4><p>Exploring nature, community, and the world around through interactive learning.</p></div>
+        <div class="acad-card"><div class="acad-icon">🎨</div><h4>Art & Craft</h4><p>Creative expression through drawing, colouring, and hands-on art projects.</p></div>
+      </div>
+    </div>
+    <div id="tab-upper" class="tab-panel reveal">
+      <div class="academics-grid">
+        <div class="acad-card"><div class="acad-icon">🔭</div><h4>Science</h4><p>Physics, Chemistry, Biology concepts through lab experiments and exploration.</p></div>
+        <div class="acad-card"><div class="acad-icon">🗺️</div><h4>Social Studies</h4><p>History, Geography, and Civics to understand our world and our role in it.</p></div>
+        <div class="acad-card"><div class="acad-icon">💻</div><h4>Computer Science</h4><p>Digital literacy, basic programming, and technology skills for the modern age.</p></div>
+        <div class="acad-card"><div class="acad-icon">🇮🇳</div><h4>Telugu & Hindi</h4><p>Rich language education celebrating our regional heritage alongside Hindi.</p></div>
+      </div>
+    </div>
+    <div id="tab-secondary" class="tab-panel reveal">
+      <div class="academics-grid">
+        <div class="acad-card"><div class="acad-icon">📐</div><h4>Advanced Maths</h4><p>Algebra, Geometry, and problem-solving for competitive examinations.</p></div>
+        <div class="acad-card"><div class="acad-icon">⚗️</div><h4>Sciences (PCB)</h4><p>Comprehensive Physics, Chemistry and Biology with practical lab sessions.</p></div>
+        <div class="acad-card"><div class="acad-icon">📝</div><h4>Board Exam Prep</h4><p>Rigorous SSC Board preparation with mock tests, past papers, and mentoring.</p></div>
+        <div class="acad-card"><div class="acad-icon">💡</div><h4>Career Guidance</h4><p>Counselling sessions to help students explore career paths and opportunities.</p></div>
+      </div>
+    </div>
+    <div id="tab-activities" class="tab-panel reveal">
+      <div class="academics-grid">
+        <div class="acad-card"><div class="acad-icon">🎭</div><h4>Cultural Programs</h4><p>Annual Day, Blossom celebrations, dance and drama to nurture performing arts.</p></div>
+        <div class="acad-card"><div class="acad-icon">⚽</div><h4>Sports & Games</h4><p>Physical education and sports activities promoting fitness and teamwork.</p></div>
+        <div class="acad-card"><div class="acad-icon">🎤</div><h4>Public Speaking</h4><p>Elocution, debate, and Student Led Conferences building confident communicators.</p></div>
+        <div class="acad-card"><div class="acad-icon">🚀</div><h4>Science Clubs</h4><p>Innovative projects, exhibitions, and experiments to spark scientific curiosity.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-inner">
+    <div class="gallery-header reveal">
+      <div>
+        <div class="section-label">📸 Gallery</div>
+        <h2 class="section-title">Life at <span class="accent">BVN</span></h2>
+      </div>
+      
+<div class="instagram-grid">
+
+    <div class="gallery-item" data-cat="events">
+        <blockquote
+            class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DOFdg6Qkg9U/"
+            data-instgrm-version="14">
+        </blockquote>
+    </div>
+
+    <div class="gallery-item" data-cat="events">
+        <blockquote
+            class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DVG-qdUEkgM/"
+            data-instgrm-version="14">
+        </blockquote>
+    </div>
+
+    <div class="gallery-item" data-cat="events">
+        <blockquote
+            class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DNaTjZ5yP22/"
+            data-instgrm-version="14">
+        </blockquote>
+    </div>
+
+</div>
+
+
+    
+
+    <div class="insta-follow-container reveal">
+      <a href="https://www.instagram.com/bvn_school_dhanwada" target="_blank" class="insta-follow-btn">
+        <!-- Instagram SVG logo -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Follow us on Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS + TESTIMONIALS -->
+<section id="events">
+  <div class="section-inner">
+    <div class="events-side-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start;">
+      <div>
+        <div class="section-label reveal">📅 Events & Activities</div>
+        <h2 class="section-title reveal">School <span class="accent">Calendar</span></h2>
+        <p class="section-desc reveal">A vibrant school life with events celebrating learning, culture, and community throughout the year.</p>
+        <div class="events-timeline" style="margin-top:2rem;">
+          <div class="event-item reveal"><div class="event-dot"></div><div class="event-date">Jan 2026</div><div class="event-card"><h4>🎊 Annual Day – Blossom 2026</h4><p>Grand celebrations with cultural performances, awards, and proud parent moments.</p><span class="event-tag">Cultural</span></div></div>
+          <div class="event-item reveal"><div class="event-dot"></div><div class="event-date">Dec 2025</div><div class="event-card"><h4>🎤 Student Led Conference</h4><p>December 20 · 9:30 AM–12:30 PM · Platform to build confidence and leadership.</p><span class="event-tag">Leadership</span></div></div>
+          <div class="event-item reveal"><div class="event-dot"></div><div class="event-date">Oct 2025</div><div class="event-card"><h4>🔭 Planetarium Educational Tour</h4><p>Science excursion inspiring young astronomers and curious minds.</p><span class="event-tag">Educational</span></div></div>
+          <div class="event-item reveal"><div class="event-dot"></div><div class="event-date">Sep 2024</div><div class="event-card"><h4>🐘 Ganesha Chaturthi Celebrations</h4><p>Traditional celebration bringing students and teachers together in festive spirit.</p><span class="event-tag">Festival</span></div></div>
+          <div class="event-item reveal"><div class="event-dot"></div><div class="event-date">Oct 2024</div><div class="event-card"><h4>🌸 Bathukamma Festival</h4><p>Colourful Telangana festival celebrated with great enthusiasm by all.</p><span class="event-tag">Festival</span></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label reveal">💬 Voices of BVN</div>
+        <h2 class="section-title reveal">What Parents <span class="accent">Say</span></h2>
+        <div class="testimonial-grid" style="grid-template-columns:1fr; margin-top:2rem;">
+          <div class="testimonial-card reveal"><div class="quote-mark">"</div><p class="testimonial-text">BVN has transformed my daughter completely. The teachers are so caring and the environment is very positive. She looks forward to school every single day!</p><div class="testimonial-author"><div class="author-avatar">P</div><div class="author-info"><div class="author-name">Padmavathi Reddy</div><div class="author-role">Parent of Class 5 student</div></div></div></div>
+          <div class="testimonial-card reveal"><div class="quote-mark">"</div><p class="testimonial-text">The Student Led Conference was outstanding. My son spoke with so much confidence on stage — I had tears of joy. Thank you BVN!</p><div class="testimonial-author"><div class="author-avatar">R</div><div class="author-info"><div class="author-name">Ramesh Kumar</div><div class="author-role">Parent of Class 7 student</div></div></div></div>
+          <div class="testimonial-card reveal"><div class="quote-mark">"</div><p class="testimonial-text">Excellent academic standards combined with beautiful cultural events. BVN truly lives up to its motto — the school for a better tomorrow.</p><div class="testimonial-author"><div class="author-avatar">S</div><div class="author-info"><div class="author-name">Sunitha Nair</div><div class="author-role">Parent of Class 9 student</div></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADMISSIONS -->
+<section id="admissions">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto;">
+      <div class="section-label">🎓 Admissions 2026–27</div>
+      <h2 class="section-title">Join the <span class="accent">BVN Family</span></h2>
+      <p class="section-desc" style="margin:0 auto;">Admissions are open for all grades. Take the first step towards your child's brighter future today.</p>
+    </div>
+    <div class="admissions-layout">
+      <div class="admission-form-card reveal">
+        <h3>📝 Admission Enquiry</h3>
+        <div class="form-group"><label>Child's Full Name *</label><input type="text" placeholder="Enter child's name"></div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div class="form-group"><label>Date of Birth *</label><input type="date"></div>
+          <div class="form-group"><label>Applying for Grade *</label>
+            <select><option value="">Select Grade</option><option>LKG</option><option>UKG</option><option>Class I</option><option>Class II</option><option>Class III</option><option>Class IV</option><option>Class V</option><option>Class VI</option><option>Class VII</option><option>Class VIII</option><option>Class IX</option><option>Class X</option></select>
+          </div>
+        </div>
+        <div class="form-group"><label>Parent / Guardian Name *</label><input type="text" placeholder="Parent's full name"></div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div class="form-group"><label>Mobile Number *</label><input type="tel" placeholder="+91 XXXXX XXXXX"></div>
+          <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
+        </div>
+        <div class="form-group"><label>Current School (if any)</label><input type="text" placeholder="Previous school name"></div>
+        <div class="form-group"><label>Message / Questions</label><textarea placeholder="Any specific questions or requirements..."></textarea></div>
+        <button class="form-submit" onclick="submitForm(event)">Submit Enquiry →</button>
+        <p style="color:var(--text-light); font-size:0.75rem; text-align:center; margin-top:1rem;">We'll contact you within 24 hours of your enquiry.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto;">
+      <div class="section-label">📍 Contact Us</div>
+      <h2 class="section-title">Get in <span class="accent">Touch</span></h2>
+      <p class="section-desc" style="margin:0 auto;">We'd love to hear from you. Visit us, call us, or reach us on social media.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <!-- Address -->
+        <div class="contact-row">
+          <div class="contact-row-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#e8820c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="contact-row-text">
+            <span class="c-label">Address</span>
+            <span class="c-value">BVN High School, Vil & Mdl: Dhanwada,Mahabubnagar, Telangana, India</span>
+          </div>
+        </div>
+        <!-- Phone -->
+        <div class="contact-row">
+          <div class="contact-row-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#e8820c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.42 2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.08-.9a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="contact-row-text">
+            <span class="c-label">Phone</span>
+            <span class="c-value">Call us Mon–Sat · 8:00 AM – 4:00 PM</span>
+          </div>
+        </div>
+        <!-- Instagram -->
+        <div class="contact-row">
+          <div class="contact-row-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#e8820c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </div>
+          <div class="contact-row-text">
+            <span class="c-label">Instagram</span>
+            <a href="https://www.instagram.com/bvn_school_dhanwada" target="_blank">@bvn_school_dhanwada</a>
+          </div>
+        </div>
+        <!-- YouTube -->
+        <div class="contact-row">
+          <div class="contact-row-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#e8820c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#e8820c" stroke="none"/></svg>
+          </div>
+          <div class="contact-row-text">
+            <span class="c-label">YouTube</span>
+            <a href="https://youtube.com/@b.vijayalakshmi1997" target="_blank">B. Vijayalakshmi Channel</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="map-embed reveal">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15319.2!2d77.9833!3d16.7483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcf59c0b6cc666d%3A0xf16ea01ebf354b76!2sDhanwada%2C%20Telangana!5e0!3m2!1sen!2sin!4v1" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-img">📚</div>
+          <div class="footer-brand-name">Bharathi Vidhya Nikethan High School <span>Dhanwada, Mahabubnagar, Telangana</span></div>
+        </div>
+        <p class="footer-desc">"The School for a Better Tomorrow" — nurturing young minds with quality education, cultural values, and holistic growth in Dhanwada, Telangana.</p>
+        <div class="social-links">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/bvn_school_dhanwada" target="_blank" class="social-link insta" title="Instagram">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <!-- YouTube -->
+          <a href="https://youtube.com/@b.vijayalakshmi1997" target="_blank" class="social-link yt" title="YouTube">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+          <!-- Google Maps -->
+          <a href="https://maps.app.goo.gl/aHCfLXdRws3bEara8" target="_blank" class="social-link maps" title="Location">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="#about">About BVN</a></li>
+          <li><a href="#why-us">Why Choose Us</a></li>
+          <li><a href="#academics">Academics</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#admissions">Admissions</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Programmes</h5>
+        <ul>
+          <li><a href="#academics">Primary (I–V)</a></li>
+          <li><a href="#academics">Upper Primary (VI–VIII)</a></li>
+          <li><a href="#academics">Secondary (IX–X)</a></li>
+          <li><a href="#academics">Arts & Cultural</a></li>
+          <li><a href="#academics">Sports Programme</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#">Dhanwada, Mahabubnagar</a></li>
+          <li><a href="#">Telangana, India</a></li>
+          <li><a href="https://www.instagram.com/bvn_school_dhanwada" target="_blank">Instagram Page</a></li>
+          <li><a href="#admissions">Admission Enquiry</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Bharathi Vidhya Nikethan High School, Dhanwada. All rights reserved.</p>
+      <p>Made with ❤️ for BVN Family</p>
+    </div>
+  </div>
+</footer>
+
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  
+
+  
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  document.getElementById('scroll-top').classList.toggle('visible', window.scrollY > 400);
+});
+
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+
+function switchTab(id, e) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  e.target.classList.add('active');
+}
+
+function filterGallery(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b =>
+        b.classList.remove('active')
+    );
+    
+    btn.classList.add('active');
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        const show = cat === 'all' || item.dataset.cat === cat;
+        item.style.display = show ? 'block' : 'none';
+    });
+
+    if (window.instgrm) {
+        window.instgrm.Embeds.process();
+    }
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+function createParticles() {
+  const c = document.getElementById('particles');
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const s = Math.random() * 6 + 2;
+    p.style.cssText = `width:${s}px;height:${s}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*8}s;animation-duration:${6+Math.random()*6}s;`;
+    c.appendChild(p);
+  }
+}
+createParticles();
+
+function submitForm(e) {
+  const btn = e.target;
+  btn.textContent = '✓ Enquiry Submitted!';
+  btn.style.background = 'linear-gradient(135deg,#27ae60,#2ecc71)';
+  setTimeout(() => { btn.textContent = 'Submit Enquiry →'; btn.style.background = ''; }, 3000);
+}
+
+function animateCounter(el, target, suffix) {
+  let v = 0; const step = target / 60;
+  const iv = setInterval(() => {
+    v += step;
+    if (v >= target) { el.textContent = target + suffix; clearInterval(iv); return; }
+    el.textContent = Math.floor(v) + suffix;
+  }, 16);
+}
+
+const so = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const n = e.target.querySelectorAll('.stat-number');
+      n[0] && animateCounter(n[0], 500, '+');
+      n[1] && animateCounter(n[1], 30, '+');
+      n[2] && animateCounter(n[2], 100, '%');
+      so.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelector('.hero-stats') && so.observe(document.querySelector('.hero-stats'));
+
+const aboutObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+
+      e.target.querySelectorAll('.stat-number').forEach(num => {
+        animateCounter(
+          num,
+          parseInt(num.dataset.target),
+          num.dataset.suffix
+        );
+      });
+
+      aboutObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelector('.about-visual-stack') &&
+aboutObserver.observe(document.querySelector('.about-visual-stack'));
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if (id === '#') return;
+    const el = document.querySelector(id);
+    if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+<script async src="https://www.instagram.com/embed.js"></script>
+</body>
+</html>
