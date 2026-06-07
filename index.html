@@ -376,6 +376,47 @@
 }
   /* ── WHY US ── */
   #why-us { background: var(--section-alt); }
+.why-images{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    justify-content:center;
+    margin-top:3rem;
+}
+
+.why-image-card{
+    background:#fff;
+    padding:10px;
+    border-radius:15px;
+    border:1px solid var(--card-border);
+    box-shadow:0 8px 25px rgba(26,58,107,.08);
+}
+
+.why-image-card img{
+    max-width:300px;   /* change 300px to your preferred size */
+    width:auto;
+    height:auto;
+    display:block;
+}
+
+.lead-school img{
+    max-width:100%;
+}
+.lead-school{
+    background:#fff;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 10px 25px rgba(26,58,107,0.08);
+    border:1px solid var(--card-border);
+      display:flex;
+    align-items:center;
+    justify-content:center;
+}
+@media(max-width:768px){
+    .why-images{
+        columns:1;
+    }
+}
 
   .why-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 1.5rem; margin-top: 3rem; }
 
@@ -617,6 +658,54 @@
   }
   .form-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(232,130,12,0.45); }
 
+
+  /* Admissions Form Mobile Fix */
+@media (max-width: 768px) {
+
+  .admission-form-card{
+    padding: 1.2rem;
+  }
+
+  .admission-form-card h3{
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+
+  /* Make all 2-column rows become single column */
+  #admissions .form-row,
+  #admissions div[style*="grid-template-columns:1fr 1fr"]{
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0.8rem !important;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea{
+    width: 100%;
+    font-size: 16px; /* Prevent iPhone zoom */
+  }
+
+  .form-group label{
+    font-size: 0.9rem;
+  }
+
+  .form-submit{
+    width: 100%;
+  }
+}
+
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1rem;
+}
+
+@media (max-width:768px){
+  .form-row{
+    grid-template-columns:1fr;
+  }
+}
   /* ── CONTACT ── */
   #contact { background: var(--section-alt); }
 
@@ -793,7 +882,7 @@
 <nav id="navbar">
   <a href="#hero" class="nav-brand">
    <div class="nav-logo">
-    <img src="images/Logo.png" alt="School Logo">
+    <img src="images/logo.png" alt="School Logo">
 </div>
     <div class="nav-title">BVN High School <span>Dhanwada </span></div>
   </a>
@@ -858,7 +947,7 @@
         <div class="hero-logo-ring"></div>
         <!-- FIXED: Using hero-logo-inner (220px circle) instead of footer-logo-img (50px) -->
         <div class="hero-logo-inner">
-          <img src="images/Logo.png" alt="BVN School Logo">
+          <img src="images/logo.png" alt="BVN School Logo">
         </div>
       </div>
     </div>
@@ -878,7 +967,13 @@
         <ul class="about-points">
           <li><span class="point-icon">🎯</span><div class="point-text"><strong>Our Mission</strong><span>To provide quality education that fosters intellectual growth, cultural pride, and character development in every student.</span></div></li>
           <li><span class="point-icon">🌟</span><div class="point-text"><strong>Our Vision</strong><span>A school where every child blossoms into a confident, responsible, and compassionate citizen of tomorrow.</span></div></li>
-          <li><span class="point-icon">📍</span><div class="point-text"><strong>Our Location</strong><span>Vil & Mdl: Dhanwada, Telangana – deeply rooted in the community we serve.</span></div></li>
+          <li>
+  <span class="point-icon">💻</span>
+  <div class="point-text">
+    <strong>LEAD Digital Teaching</strong>
+    <span>Powered by LEAD School, bringing technology-enabled learning and a structured curriculum for better academic outcomes.</span>
+  </div>
+</li>
           <li><span class="point-icon">🤝</span><div class="point-text"><strong>Community Bond</strong><span>We celebrate Sankranthi, Bathukamma, Ganesha Chaturthi and all festivals together as one big family.</span></div></li>
         </ul>
       </div>
@@ -925,16 +1020,28 @@
       <h2 class="section-title">Where Learning <span class="accent">Comes Alive</span></h2>
       <p class="section-desc" style="margin:0 auto;">We go beyond textbooks to nurture well-rounded human beings ready for tomorrow's world.</p>
     </div>
-    <div class="why-grid">
-      <div class="why-card reveal"><span class="why-icon">👨‍🏫</span><h3>Expert Faculty</h3><p>Dedicated and experienced teachers who genuinely care about each student's progress and holistic development.</p></div>
-      <div class="why-card reveal"><span class="why-icon">🔬</span><h3>Modern Labs</h3><p>Science and computer labs equipped with modern tools to make learning hands-on, interactive, and exciting.</p></div>
-      <div class="why-card reveal"><span class="why-icon">🎨</span><h3>Arts & Culture</h3><p>Rich cultural program celebrating Telugu traditions — Bathukamma, Sankranthi, Ganesha Chaturthi and more.</p></div>
-      <div class="why-card reveal"><span class="why-icon">🚌</span><h3>Educational Tours</h3><p>Exciting field trips and excursions like the Planetarium Visit (2025) to broaden young horizons beyond classrooms.</p></div>
-      <div class="why-card reveal"><span class="why-icon">🎤</span><h3>Confidence Building</h3><p>Student Led Conferences and stage programs help children discover their voice and build self-confidence early.</p></div>
-      <div class="why-card reveal"><span class="why-icon">🏅</span><h3>Proven Results</h3><p>Consistent academic excellence with strong board exam results and proud alumni across diverse fields.</p></div>
-      <div class="why-card reveal"><span class="why-icon">🌈</span><h3>Inclusive Environment</h3><p>A warm, safe, and inclusive campus where every child — regardless of background — is valued and celebrated.</p></div>
-      <div class="why-card reveal"><span class="why-icon">📱</span><h3>Active Community</h3><p>Stay connected through our active Instagram page with 635+ followers, sharing school moments as they happen.</p></div>
-    </div>
+   <div class="why-images reveal">
+
+  <div class="why-image-card">
+      <img src="images/why1.jpg" alt="">
+  </div>
+
+  <div class="why-image-card">
+      <img src="images/why2.jpg" alt="">
+  </div>
+
+  <div class="why-image-card">
+      <img src="images/why3.jpg" alt="">
+  </div>
+
+  <div class="why-image-card">
+      <img src="images/why4.jpg" alt="">
+  </div>
+  <div class="why-image-card lead-school">
+      <img src="images/why5.jpg" alt="">
+  </div>
+
+</div>
   </div>
 </section>
 
@@ -1076,24 +1183,74 @@
     </div>
     <div class="admissions-layout">
       <div class="admission-form-card reveal">
-        <h3>📝 Admission Enquiry</h3>
-        <div class="form-group"><label>Child's Full Name *</label><input type="text" placeholder="Enter child's name"></div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
-          <div class="form-group"><label>Date of Birth *</label><input type="date"></div>
-          <div class="form-group"><label>Applying for Grade *</label>
-            <select><option value="">Select Grade</option><option>LKG</option><option>UKG</option><option>Class I</option><option>Class II</option><option>Class III</option><option>Class IV</option><option>Class V</option><option>Class VI</option><option>Class VII</option><option>Class VIII</option><option>Class IX</option><option>Class X</option></select>
-          </div>
+    <h3>📝 Admission Enquiry</h3>
+
+    <div class="form-group">
+        <label>Child's Full Name *</label>
+        <input type="text" id="childName" placeholder="Enter child's name">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label>Date of Birth *</label>
+            <input type="date" id="dob">
         </div>
-        <div class="form-group"><label>Parent / Guardian Name *</label><input type="text" placeholder="Parent's full name"></div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
-          <div class="form-group"><label>Mobile Number *</label><input type="tel" placeholder="+91 XXXXX XXXXX"></div>
-          <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
+
+        <div class="form-group">
+            <label>Applying for Grade *</label>
+            <select id="grade">
+                <option value="">Select Grade</option>
+                <option>LKG</option>
+                <option>UKG</option>
+                <option>Class I</option>
+                <option>Class II</option>
+                <option>Class III</option>
+                <option>Class IV</option>
+                <option>Class V</option>
+                <option>Class VI</option>
+                <option>Class VII</option>
+                <option>Class VIII</option>
+                <option>Class IX</option>
+                <option>Class X</option>
+            </select>
         </div>
-        <div class="form-group"><label>Current School (if any)</label><input type="text" placeholder="Previous school name"></div>
-        <div class="form-group"><label>Message / Questions</label><textarea placeholder="Any specific questions or requirements..."></textarea></div>
-        <button class="form-submit" onclick="submitForm(event)">Submit Enquiry →</button>
-        <p style="color:var(--text-light); font-size:0.75rem; text-align:center; margin-top:1rem;">We'll contact you within 24 hours of your enquiry.</p>
-      </div>
+    </div>
+
+    <div class="form-group">
+        <label>Parent / Guardian Name *</label>
+        <input type="text" id="parentName" placeholder="Parent's full name">
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+        <div class="form-group">
+            <label>Mobile Number *</label>
+            <input type="tel" id="mobile" maxlength="10" placeholder="9876543210">
+        </div>
+
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="email" placeholder="your@email.com">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Current School (if any)</label>
+        <input type="text" id="currentSchool" placeholder="Previous school name">
+    </div>
+
+    <div class="form-group">
+        <label>Message / Questions</label>
+        <textarea id="message" placeholder="Any specific questions or requirements..."></textarea>
+    </div>
+
+    <button class="form-submit" onclick="submitForm(event)">
+        Submit Enquiry →
+    </button>
+
+    <p style="color:var(--text-light); font-size:0.75rem; text-align:center; margin-top:1rem;">
+        We'll contact you within 24 hours of your enquiry.
+    </p>
+</div>
     </div>
   </div>
 </section>
@@ -1121,14 +1278,18 @@
         </div>
         <!-- Phone -->
         <div class="contact-row">
-          <div class="contact-row-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#e8820c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.42 2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.08-.9a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          </div>
-          <div class="contact-row-text">
-            <span class="c-label">Phone</span>
-            <span class="c-value">Call us Mon–Sat · 8:00 AM – 4:00 PM</span>
-          </div>
-        </div>
+  <div class="contact-row-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#e8820c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.42 2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.08-.9a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+    </svg>
+  </div>
+
+  <div class="contact-row-text">
+    <span class="c-label">Phone</span>
+    <a href="tel:+919490321379" class="c-value">+91 9490321379</a>
+    <a href="tel:+918919791106" class="c-value">+91 8919791106</a>
+  </div>
+</div>
         <!-- Instagram -->
         <div class="contact-row">
           <div class="contact-row-icon">
@@ -1276,11 +1437,73 @@ function createParticles() {
 createParticles();
 
 function submitForm(e) {
-  const btn = e.target;
-  btn.textContent = '✓ Enquiry Submitted!';
-  btn.style.background = 'linear-gradient(135deg,#27ae60,#2ecc71)';
-  setTimeout(() => { btn.textContent = 'Submit Enquiry →'; btn.style.background = ''; }, 3000);
+
+  const childName = document.getElementById("childName").value.trim();
+  const dob = document.getElementById("dob").value;
+  const grade = document.getElementById("grade").value;
+  const parentName = document.getElementById("parentName").value.trim();
+  const mobile = document.getElementById("mobile").value.trim();
+
+  // Child Name
+  if (!childName) {
+    alert("Please enter Child's Full Name");
+    return;
+  }
+
+  // DOB
+  if (!dob) {
+    alert("Please select Date of Birth");
+    return;
+  }
+
+  const selectedDate = new Date(dob);
+  const today = new Date();
+
+  today.setHours(0,0,0,0);
+
+  if (selectedDate > today) {
+    alert("Date of Birth cannot be in the future");
+    return;
+  }
+
+  // Grade
+  if (!grade) {
+    alert("Please select Applying Grade");
+    return;
+  }
+
+  // Parent Name
+  if (!parentName) {
+    alert("Please enter Parent / Guardian Name");
+    return;
+  }
+
+// Mobile Validation
+
+console.log("Mobile Value:", mobile);
+console.log("Digits:", mobile.replace(/\D/g, ''));
+
+const mobileDigits = mobile.replace(/\D/g, '');
+
+if (mobileDigits.length !== 10) {
+    alert("Please enter a valid 10-digit mobile number");
+    return;
 }
+  // Success
+  const btn = e.target;
+
+  btn.textContent = "✓ Enquiry Submitted!";
+  btn.style.background =
+    "linear-gradient(135deg,#27ae60,#2ecc71)";
+
+  setTimeout(() => {
+    btn.textContent = "Submit Enquiry →";
+    btn.style.background = "";
+  }, 3000);
+}
+
+document.getElementById("dob").max =
+new Date().toISOString().split("T")[0];
 
 function animateCounter(el, target, suffix) {
   let v = 0; const step = target / 60;
